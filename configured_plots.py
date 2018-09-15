@@ -160,7 +160,7 @@ def generate_plots(ulog, px4_ulog, db_data, vehicle_data, link_to_3d_page):
     data_plot.add_graph(['alt'], colors8[2:3], ['融合后高度'])
     data_plot.change_dataset('position_setpoint_triplet')
     data_plot.add_circle(['current.alt'], [plot_config['mission_setpoint_color']],
-                         ['Altitude Setpoint'])
+                         ['高度设置值'])
     data_plot.change_dataset('actuator_controls_0')
     data_plot.add_graph([lambda data: ('thrust', data['control[3]']*100)],
                         colors8[6:7], ['油门 [0, 100]'])
@@ -586,7 +586,7 @@ def generate_plots(ulog, px4_ulog, db_data, vehicle_data, link_to_3d_page):
     # estimator watchdog
     try:
         data_plot = DataPlot(data, plot_config, 'estimator_status',
-                             y_start=0, title='解算器状态监测'',
+                             y_start=0, title='解算器状态监测',
                              plot_height='small', changed_params=changed_params,
                              x_range=x_range)
         estimator_status = ulog.get_dataset('estimator_status').data
@@ -603,7 +603,7 @@ def generate_plots(ulog, px4_ulog, db_data, vehicle_data, link_to_3d_page):
             ('航向校验位', (estimator_status['innovation_check_flags']>>6)&1),
             ('空速校验位', (estimator_status['innovation_check_flags']>>7)&1),
             ('侧滑角校验位', (estimator_status['innovation_check_flags']>>8)&1),
-            ('定高模块校验位'', (estimator_status['innovation_check_flags']>>9)&1),
+            ('定高模块校验位', (estimator_status['innovation_check_flags']>>9)&1),
             ('光流校验位', (estimator_status['innovation_check_flags']>>10)&0x3),
             ]
         # filter: show only the flags that have non-zero samples
