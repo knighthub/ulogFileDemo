@@ -81,9 +81,9 @@ def get_info_table_html(ulog, px4_ulog, db_data, vehicle_data, vtol_states):
     if airframe_name_tuple is not None:
         airframe_name, airframe_id = airframe_name_tuple
         if len(airframe_name) == 0:
-            table_text_left.append(('Airframe', airframe_id))
+            table_text_left.append(('机型', airframe_id))
         else:
-            table_text_left.append(('Airframe', airframe_name+' <small>('+airframe_id+')</small>'))
+            table_text_left.append(('机型', airframe_name+' <small>('+airframe_id+')</small>'))
 
 
     # HW & SW
@@ -92,7 +92,7 @@ def get_info_table_html(ulog, px4_ulog, db_data, vehicle_data, vtol_states):
         sys_hardware = escape(ulog.msg_info_dict['ver_hw'])
         if 'ver_hw_subtype' in ulog.msg_info_dict:
             sys_hardware += ' (' + escape(ulog.msg_info_dict['ver_hw_subtype']) + ')'
-        table_text_left.append(('Hardware', sys_hardware))
+        table_text_left.append(('硬件', sys_hardware))
 
     release_str = ulog.get_version_info_str()
     if release_str is None:
@@ -107,7 +107,7 @@ def get_info_table_html(ulog, px4_ulog, db_data, vehicle_data, vtol_states):
     if 'ver_sw' in ulog.msg_info_dict:
         ver_sw = escape(ulog.msg_info_dict['ver_sw'])
         ver_sw_link = 'https://github.com/PX4/Firmware/commit/'+ver_sw
-        table_text_left.append(('Software Version', release_str +
+        table_text_left.append(('软件版本', release_str +
                                 '<a href="'+ver_sw_link+'" target="_blank">'+ver_sw[:8]+'</a>'+
                                 release_str_suffix+branch_info))
 
@@ -115,7 +115,7 @@ def get_info_table_html(ulog, px4_ulog, db_data, vehicle_data, vtol_states):
         os_name = escape(ulog.msg_info_dict['sys_os_name'])
         os_ver = ulog.get_version_info_str('sys_os_ver_release')
         if os_ver is not None:
-            table_text_left.append(('OS Version', os_name + ', ' + os_ver))
+            table_text_left.append(('操作系统版本', os_name + ', ' + os_ver))
 
     table_text_left.append(('Estimator', px4_ulog.get_estimator()))
 
@@ -144,7 +144,7 @@ SDLOG_UTC_OFFSET: {}'''.format(utctimestamp.strftime('%d-%m-%Y %H:%M'), utc_offs
             tooltip = 'data-toggle="tooltip" data-delay=\'{"show":0, "hide":100}\' '+ \
                 'title="'+tooltip+'" '
             table_text_left.append(
-                ('Logging Start '+
+                ('日志开始记录时间 '+
                  '<i '+tooltip+' class="fa fa-question" aria-hidden="true" '+
                  'style="font-size: larger; color:#666"></i>',
                  '<span style="display:none" id="logging-start-element">'+
@@ -157,7 +157,7 @@ SDLOG_UTC_OFFSET: {}'''.format(utctimestamp.strftime('%d-%m-%Y %H:%M'), utc_offs
     # logging duration
     m, s = divmod(int((ulog.last_timestamp - ulog.start_timestamp)/1e6), 60)
     h, m = divmod(m, 60)
-    table_text_left.append(('Logging Duration', '{:d}:{:02d}:{:02d}'.format(h, m, s)))
+    table_text_left.append(('日志时长', '{:d}:{:02d}:{:02d}'.format(h, m, s)))
 
     # dropouts
     dropout_durations = [dropout.duration for dropout in ulog.dropouts]
