@@ -237,13 +237,13 @@ SDLOG_UTC_OFFSET: {}'''.format(utctimestamp.strftime('%d-%m-%Y %H:%M'), utc_offs
         if total_dist_m < 1:
             pass # ignore
         elif total_dist_m > 1000:
-            table_text_right.append(('Distance', "{:.2f} km".format(total_dist_m/1000)))
+            table_text_right.append(('飞行距离', "{:.2f} km".format(total_dist_m/1000)))
         else:
-            table_text_right.append(('Distance', "{:.1f} m".format(total_dist_m)))
+            table_text_right.append(('飞行距离', "{:.1f} m".format(total_dist_m)))
 
         if len(pos_z) > 0:
             max_alt_diff = np.amax(pos_z) - np.amin(pos_z)
-            table_text_right.append(('Max Altitude Difference', "{:.0f} m".format(max_alt_diff)))
+            table_text_right.append(('最大高度差', "{:.0f} m".format(max_alt_diff)))
 
         table_text_right.append(('', '')) # spacing
 
@@ -262,14 +262,14 @@ SDLOG_UTC_OFFSET: {}'''.format(utctimestamp.strftime('%d-%m-%Y %H:%M'), utc_offs
                     vtol_states, local_pos_timestamp, speed_vector)
                 if mean_speed_mc is not None:
                     table_text_right.append(
-                        ('Average Speed MC', "{:.1f} km/h".format(mean_speed_mc*3.6)))
+                        ('旋翼平均速度', "{:.1f} km/h".format(mean_speed_mc*3.6)))
                 if mean_speed_fw is not None:
                     table_text_right.append(
-                        ('Average Speed FW', "{:.1f} km/h".format(mean_speed_fw*3.6)))
-            table_text_right.append(('Max Speed', "{:.1f} km/h".format(max_speed*3.6)))
-            table_text_right.append(('Max Speed Horizontal', "{:.1f} km/h".format(max_h_speed*3.6)))
-            table_text_right.append(('Max Speed Up', "{:.1f} km/h".format(np.amax(-vel_z)*3.6)))
-            table_text_right.append(('Max Speed Down', "{:.1f} km/h".format(-np.amin(-vel_z)*3.6)))
+                        ('固定翼平均速度', "{:.1f} km/h".format(mean_speed_fw*3.6)))
+            table_text_right.append(('最大速度', "{:.1f} km/h".format(max_speed*3.6)))
+            table_text_right.append(('最大水平速度', "{:.1f} km/h".format(max_h_speed*3.6)))
+            table_text_right.append(('最大爬升速度', "{:.1f} km/h".format(np.amax(-vel_z)*3.6)))
+            table_text_right.append(('最大下降速度', "{:.1f} km/h".format(-np.amin(-vel_z)*3.6)))
 
             table_text_right.append(('', '')) # spacing
 
@@ -279,7 +279,7 @@ SDLOG_UTC_OFFSET: {}'''.format(utctimestamp.strftime('%d-%m-%Y %H:%M'), utc_offs
         if len(roll) > 0:
             # tilt = angle between [0,0,1] and [0,0,1] rotated by roll and pitch
             tilt_angle = np.arccos(np.multiply(np.cos(pitch), np.cos(roll)))*180/np.pi
-            table_text_right.append(('Max Tilt Angle', "{:.1f} deg".format(np.amax(tilt_angle))))
+            table_text_right.append(('最大倾斜角', "{:.1f} deg".format(np.amax(tilt_angle))))
 
         rollspeed = vehicle_attitude.data['rollspeed']
         pitchspeed = vehicle_attitude.data['pitchspeed']
@@ -288,7 +288,7 @@ SDLOG_UTC_OFFSET: {}'''.format(utctimestamp.strftime('%d-%m-%Y %H:%M'), utc_offs
             max_rot_speed = np.amax(np.sqrt(np.square(rollspeed) +
                                             np.square(pitchspeed) +
                                             np.square(yawspeed)))
-            table_text_right.append(('Max Rotation Speed', "{:.1f} deg/s".format(
+            table_text_right.append(('最大角速度', "{:.1f} deg/s".format(
                 max_rot_speed*180/np.pi)))
 
         table_text_right.append(('', '')) # spacing
@@ -306,12 +306,12 @@ SDLOG_UTC_OFFSET: {}'''.format(utctimestamp.strftime('%d-%m-%Y %H:%M'), utc_offs
                         vtol_states, battery_status.data['timestamp'], battery_current)
                     if mean_current_mc is not None:
                         table_text_right.append(
-                            ('Average Current MC', "{:.1f} A".format(mean_current_mc)))
+                            ('旋翼平均电流', "{:.1f} A".format(mean_current_mc)))
                     if mean_current_fw is not None:
                         table_text_right.append(
-                            ('Average Current FW', "{:.1f} A".format(mean_current_fw)))
+                            ('固定翼平均电流', "{:.1f} A".format(mean_current_fw)))
 
-                table_text_right.append(('Max Current', "{:.1f} A".format(max_current)))
+                table_text_right.append(('最大电流', "{:.1f} A".format(max_current)))
     except:
         pass # ignore (e.g. if topic not found)
 
