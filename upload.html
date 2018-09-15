@@ -1,0 +1,212 @@
+
+{% include 'header.html' %}
+
+<h3>上传日志</h3>
+
+<p>
+	请选择一个Ulog日志文件用于绘图和分析。
+</p>
+
+
+
+<ul class="nav nav-tabs">
+	<li class="nav-item active">
+		<a class="nav-link active" data-toggle="tab" href="#personal">Personal</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#flightreport">Flight Report</a>
+	</li>
+</ul>
+
+<div class="tab-content">
+	<div id="personal" class="tab-pane in active">
+
+		<!-- Personal Tab -->
+		<table class="spaced">
+			<form enctype="multipart/form-data" action="/upload" method="post">
+				<tr>
+					<td colspan="2">如果您共享链接，其他人只会看到日志.</td>
+				</tr>
+				<tr>
+					<td></td><td>
+						<input type="hidden" name="type" value="personal">
+					</td>
+				</tr>
+				<tr>
+					<td class="left">飞行日志描述 <small>(选填)</small>:</td>
+					<td>
+						<input class="form-control" placeholder="" name="description" type="text">
+					</td>
+				</tr>
+				<tr>
+					<td class="left">日志补充反馈 <small>(选填)</small>:</td>
+					<td>
+						<textarea class="form-control" cols="20" rows="3" name="feedback"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="left">电子邮箱 <small>(选填)</small>:</td>
+					<td>
+						<input class="form-control" type="text" name="email" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><small>邮箱用于给您发送一个上传链接.</small></td>
+				</tr>
+
+				<!--
+				<tr>
+					<td colspan="2">
+						<div class="custom-control custom-checkbox">
+							<input class="custom-control-input" name="allowForAnalysis"
+							id="allowForAnalysis" type="checkbox" value="true">
+							<label class="custom-control-label" for="allowForAnalysis">
+							Allow this log file to be used for statistical analysis.</label>
+						</div>
+					</td>
+				</tr>
+				-->
+
+				<!--
+				<tr>
+				<td colspan="2">
+						<div class="custom-control custom-checkbox">
+							<input class="custom-control-input" name="obfuscated"
+							id="obfuscated" type="checkbox" value="true">
+							<label class="custom-control-label" for="obfuscated">
+							Obfuscate location information in the log.</label>
+						</div>
+				</td>
+				</tr>
+				-->
+				<tr>
+					<td class="left">ULog日志文件:</td>
+					<td>
+						<input type="file" name="filearg" class="filestyle"
+							data-text="Choose File..."
+							data-btnClass="btn-outline-primary align-right"
+							>
+					</td>
+				</tr>
+				<tr>
+					<td></td><td><br/><input class="btn btn-primary align-right"
+						 id="upload-button" type="submit" value="上传" /></td>
+				</tr>
+			</form>
+		</table>
+
+	</div>
+	<div id="flightreport" class="tab-pane fade">
+
+		<!-- Flight Report Tab -->
+		<table class="spaced">
+			<form enctype="multipart/form-data" action="/upload" method="post">
+				<tr>
+					<td colspan="2">Flight report (public) uploads:
+						provide a log with additional infos so that the PX4
+						community can use it to improve the flight
+						stack.</td>
+				</tr>
+				<tr>
+					<td></td><td>
+						<input type="hidden" name="type" value="flightreport">
+					</td>
+				</tr>
+				<tr>
+					<td class="left">Test Description:</td>
+					<td>
+						<input class="form-control" placeholder="" name="description" type="text">
+					</td>
+				</tr>
+				<tr>
+					<td class="left">Additional Feedback:</td>
+					<td>
+						<textarea class="form-control" cols="20" rows="3" name="feedback"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="left">Vehicle Name <small>(optional)</small>:
+					<td>
+						<input class="form-control" placeholder="" name="vehicleName" type="text">
+					</td>
+				</tr>
+				<tr>
+					<td class="left">E-Mail:</td>
+					<td>
+						<input class="form-control" type="text" name="email" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><small>May be used to request additional information.</small></td>
+				</tr>
+				<tr>
+					<td class="left">Wind Speed:</td><td>
+						<select class="custom-select" name=windSpeed>
+							<option value="-1" selected="selected">Please select</option>
+							<!-- Beafort Scale -->
+							<option value="0">Calm</option>
+							<option value="5">Breeze</option>
+							<option value="8">Gale</option>
+							<option value="10">Storm</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="left">Flight Rating:</td>
+					<td>
+						<select class="custom-select" name="rating">
+							<option value="notset" selected="selected">Please select</option>
+							<option value="crash_pilot">Crashed (Pilot error)</option>
+							<option value="crash_sw_hw">Crashed (Software or Hardware issue)</option>
+							<option value="unsatisfactory">Unsatisfactory</option>
+							<option value="good">Good</option>
+							<option value="great">Great!</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="left">Video Url:</td>
+					<td>
+						<input class="form-control" type="text" name="videoUrl" />
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div class="custom-control custom-checkbox">
+							<input class="custom-control-input" name="public"
+							id="public" checked="checked" type="checkbox" value="true">
+							<label class="custom-control-label" for="public">
+								Make this log publicly available (on <a href="browse">this page</a>).</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="left">ULog File:</td>
+					<td>
+						<input type="file" name="filearg" class="filestyle"
+							data-text="Choose File..."
+							data-btnClass="btn-outline-primary align-right"
+							>
+					</td>
+				</tr>
+				<tr>
+					<td></td><td><br/><input class="btn btn-primary align-right"
+						 id="upload-button" type="submit" value="Upload" /></td>
+				</tr>
+			</form>
+		</table>
+
+	</div>
+</div>
+
+
+<p>
+<b>温馨提示：</b>
+日志包含位置数据。上传日志文件，即同意将此信息存储在Aibird服务器。您可以分享这个链接，其他人也可获取日志分析信息。
+</p>
+
+
+{% include 'footer.html' %}
+
+</body>
+</html>
