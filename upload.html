@@ -1,15 +1,20 @@
 
 {% include 'header.html' %}
 
-<h3>Upload a Log File</h3>
+<h3>上传Ulog日志文件</h3>
 
-<p>
-Select and upload a log file for plotting and analysis.
-You can browse through public log files on <a href="/browse">this page</a>.
-</p>
+<br>
+<br>
 
 
-
+<ul class="nav nav-tabs">
+	<li class="nav-item active">
+		<a class="nav-link active" data-toggle="tab" href="#personal">Personal</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" data-toggle="tab" href="#flightreport">Flight Report</a>
+	</li>
+</ul>
 
 <div class="tab-content">
 	<div id="personal" class="tab-pane in active">
@@ -20,17 +25,17 @@ You can browse through public log files on <a href="/browse">this page</a>.
 				
 				
 				<tr>
-					<td class="left">ULog File:</td>
+					<td class="left">ULog文件:</td>
 					<td>
 						<input type="file" name="filearg" class="filestyle"
-							data-text="Choose File..."
+							data-text="点击选择文件"
 							data-btnClass="btn-outline-primary align-right"
 							>
 					</td>
 				</tr>
 				<tr>
 					<td></td><td><br/><input class="btn btn-primary align-right"
-						 id="upload-button" type="submit" value="Upload" /></td>
+						 id="upload-button" type="submit" value="上传" /></td>
 				</tr>
 			</form>
 		</table>
@@ -42,7 +47,7 @@ You can browse through public log files on <a href="/browse">this page</a>.
 
 	</div>
 </div>
-
+<br><br>
 
 <p>
 <b>Important</b>: The log may contain location data. By uploading a log,
