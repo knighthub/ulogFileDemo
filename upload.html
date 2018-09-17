@@ -2,27 +2,28 @@
 {% include 'header.html' %}
 <br>
 <br>
-<br>
-
-
 <h3>上传日志</h3>
+<p>请选择一个Ulog日志文件用于绘图和分析。</p>
+<br>
+<br>
+<br>
+<br>
+<div class="tab-content">
 
-<p>
-	请选择一个Ulog日志文件用于绘图和分析。
-</p>
-
-
-<br>
-<br>
-<br>
-<br>
+<ul class="nav nav-tabs">
+	<li class="nav-item active">
+		<a class="nav-link active" data-toggle="tab" href="#personal">Personal</a>
+	</li>
+</ul>
 
 <div class="tab-content">
+	<div id="personal" class="tab-pane in active">
 
 		<!-- Personal Tab -->
 		<table class="spaced">
 			<form enctype="multipart/form-data" action="/upload" method="post">
 				
+
 				<tr>
 					<td class="left">ULog日志文件:</td>
 					<td>
@@ -38,17 +39,14 @@
 				</tr>
 			</form>
 		</table>
-
-	
+	</div>	
 </div>
-
 <br>
 <br>
 <br>
 <br>
 <p>
-<b>温馨提示：</b>
-日志包含位置数据。上传日志文件，即同意将此信息存储在Aibird服务器。您可以分享这个链接，其他人也可获取日志分析信息。
+<b>温馨提示：</b>日志包含位置数据。上传日志文件，即同意将此信息存储在Aibird服务器。您可以分享这个链接，其他人也可获取日志分析信息。
 </p>
 
 
